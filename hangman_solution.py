@@ -97,7 +97,7 @@ class Hangman:
                 list_letters.append(letter)
                 continue
             else:
-                break
+                Hangman.check_letter(letter)
         pass
 
 def play_game(word_list):
