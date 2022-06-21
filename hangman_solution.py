@@ -71,6 +71,18 @@ class Hangman:
         # TODO 3: If the letter is in the word, the number of UNIQUE letters in the word that have not been guessed yet has to be reduced by 1
         # TODO 3: If the letter is not in the word, reduce the number of lives by 1
         # Be careful! A letter can contain the same letter more than once. TIP: Take a look at the index() method in the string class
+        
+        letter = letter.lower()
+        if letter in self.word:
+            print(f'Nice! {letter} is in the word')
+            for i in range(0,len(self.word)):
+                if self.word[i] == letter:
+                    self.word_guessed[i] = letter
+            print(self.word_guessed)
+        else:
+            self.num_lives -=1
+            print(f'Sorry, {letter} is not in the word')
+            print(f'You have {self.num_lives} lives remaining')
         pass
 
     def ask_letter(self):
@@ -88,17 +100,22 @@ class Hangman:
         # TODO 2. It has to be a letter that has not been tried yet. Use the list_letters attribute to check this. If it has been tried, print "{letter} was already tried".
         # TODO 3: If the letter is valid, call the check_letter method
         while True:
-            letter = input("Please choose a character:").lower()
-            if len(letter) != 1:
-                print("Please, enter just one character")
-                continue
-            elif letter in self.list_letters:
-                print("Letter has laready been tried")
-                list_letters.append(letter)
-                continue
-            else:
-                Hangman.check_letter(letter)
-        pass
+            letter = input("Please choose a character:")
+            if len(letter) == 1:
+                if letter in self.list_letters:
+                    print(f'{letter} was already tried')
+                else:
+                    self.list_letters.append(letter)
+                    self.check_letter(letter)
+                #print("Please, enter just one character")
+            
+                #if letter in self.list_letters:
+
+                    #print("Letter has already been tried")
+                    #self.list_letters.append(letter)
+                    #print(self.list_letters)
+                    #continue
+        #pass
 
 def play_game(word_list):
     # As an aid, part of the code is already provided:
